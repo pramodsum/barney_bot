@@ -87,7 +87,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Weather Responses
              ***********************************************************************/
-            if(txt == "Barney weather") {
+            if(txt.search("Barney weather") != -1) {
 
                 // Require the module
                 var Forecast = require('forecast');
@@ -151,7 +151,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Bro code
              ***********************************************************************/
-            else if(txt == "Barney bro code") {
+            else if(txt.search("bro code") != -1) {
                 var file = __dirname + '/bro_code.json';
                 fs.readFile(file, 'utf8', function (err, data) {
                   if (err) {
@@ -174,7 +174,6 @@ incoming.on('message', function(msg) {
                       });
                   }
                 });
-              }
             }
             /************************************************************************
              * Default spaced out response
