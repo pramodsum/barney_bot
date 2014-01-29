@@ -1,5 +1,3 @@
-var app = require('express').createServer();
-
 var bot = require('fancy-groupme-bot');
 var util = require('util');
 
@@ -27,11 +25,3 @@ mybot.on('botMessage', function(b, message) {
 
 console.log("i am serving");
 mybot.serve(8000);
-
-app.get('/', function(req, res) {
-  res.send("Hello World");
-});
-
-app.listen(3000, function() {
-  console.log("listening on 3000");
-});
