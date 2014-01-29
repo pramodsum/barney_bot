@@ -148,7 +148,7 @@ incoming.on('message', function(msg) {
                 API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
                     bot_id, // Identify the bot that is sending the message
-                    "Barney's got " + msg["data"]["subject"]["name"]+ ":" + msg["data"]["subject"]["text"].replace(BOT_LISTENS_FOR, ""), // Construct the message
+                    "I'm sorry, what?", // Construct the message
                     {}, // No pictures related to this post
                     function(err,res) {
                         if (err) {
