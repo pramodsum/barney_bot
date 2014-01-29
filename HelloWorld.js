@@ -152,7 +152,7 @@ incoming.on('message', function(msg) {
              * Bro code
              ***********************************************************************/
             else if(txt.search("bro code") != -1) {
-                var fileJSON = require('/bro_code.json');
+                var fileJSON = require('bro_code.json');
                 var data = JSON.parse(fileJSON);
                 // fs.readFile(file, 'utf8', function (err, data) {
                 //   if (err) {
