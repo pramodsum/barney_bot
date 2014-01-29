@@ -223,39 +223,40 @@ incoming.on('message', function(msg) {
                 }
               });
             }
+            // /************************************************************************
+            //  * Play Book
+            //  ***********************************************************************/
+            // else if(txt.search("HI") != -1 || txt.search("Hi") != -1 || txt.search("Hey") != -1 || txt.search("hi") != -1 || txt.search("hey") != -1 || txt.search("hello") != -1 || txt.search("HEY") != -1) {
+            //   var message = play_book[Math.floor(Math.random() * play_book.length)];
+            //   API.Bots.post(
+            //   ACCESS_TOKEN, // Identify the access token
+            //   bot_id, // Identify the bot that is sending the message
+            //   message, // Construct the message
+            //   {}, // No pictures related to this post
+            //   function(err,res) {
+            //     if (err) {
+            //         console.log("[API.Bots.post] Reply Message Error!");
+            //     } else {
+            //         console.log("[API.Bots.post] Reply Message Sent!");
+            //     }
+            //   });
+            // }
             /************************************************************************
-             * Bro code
-             ***********************************************************************/
-            else if(txt.search("HI") != -1 || txt.search("Hi") != -1 || txt.search("Hey") != -1 || txt.search("hi") != -1 || txt.search("hey") != -1 || txt.search("hello") != -1 || txt.search("HEY") != -1) {
-              var message = play_book[Math.floor(Math.random() * play_book.length)];
-              API.Bots.post(
-              ACCESS_TOKEN, // Identify the access token
-              bot_id, // Identify the bot that is sending the message
-              message, // Construct the message
-              {}, // No pictures related to this post
-              function(err,res) {
-                if (err) {
-                    console.log("[API.Bots.post] Reply Message Error!");
-                } else {
-                    console.log("[API.Bots.post] Reply Message Sent!");
-                }
-              });
-            }
-            /************************************************************************
-             * Default spaced out response
+             * Default BRODA responses
              ***********************************************************************/
             else if(msg["data"]["subject"]["name"] != BOT_NAME) {
-              var Request = unirest.get("https://yoda.p.mashape.com/yoda?sentence=" + txt)
-              .headers({ 
-                "X-Mashape-Authorization": "iR2g3eyxXH6tK1tZELkkVJikSMeafCWC"
-              })
-              .end(function (response) {
-                console.log(response.body);
-                txt = response.body;
-                var url = "http://brospeak.com/?api=yeah&input=" + txt;
-                var Request = unirest.get(url)
+              var url = "http://brospeak.com/?api=yeah&input=" + txt;
+              var Request = unirest.get(url)
+                .end(function (response) {
+                  console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
+                  txt = response.body;
+
+                  var Request = unirest.get("https://yoda.p.mashape.com/yoda?sentence=" + txt)
+                  .headers({ 
+                    "X-Mashape-Authorization": "iR2g3eyxXH6tK1tZELkkVJikSMeafCWC"
+                  })
                   .end(function (response) {
-                    console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
+                    console.log(response.body);
 
                     API.Bots.post(
                         ACCESS_TOKEN, // Identify the access token
@@ -268,7 +269,7 @@ incoming.on('message', function(msg) {
                             } else {
                                 console.log("[API.Bots.post] Reply Message Sent!");
                             }
-                        });
+                    });
                   });
               });
             }
