@@ -7,7 +7,7 @@ var bot = require('fancy-groupme-bot');
 var util = require('util');
 
 // local configuration read from env.
-const TOKEN = process.env['e6eb5f1ad32abbd7016a29f4ae']; // your groupme api token
+const TOKEN = process.env['162428406abb0131ffdd2e42db1e0870']; // your groupme api token
 const GROUP = process.env['5749909']; // the room you want to join
 const NAME = process.env['ThatBrown']; // the name of your bot
 const URL = process.env['http://protected-badlands-1786.herokuapp.com/']; // the domain you're serving from, should be accessible by Groupme.
