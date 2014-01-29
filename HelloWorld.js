@@ -103,7 +103,7 @@ incoming.on('message', function(msg) {
                 var message = "Nope. Nada. Zilch.";
 
                 // Retrieve weather information from coordinates (Sydney, Australia)
-                forecast.get([42.2828, 83.7347], function(err, weather) {
+                forecast.get([42.2828, -83.7347], function(err, weather) {
                   if(err) console.dir(err);
                   else console.dir(weather);
 
