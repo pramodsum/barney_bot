@@ -82,19 +82,40 @@ incoming.on('message', function(msg) {
 
         if (bot_id && msg["data"]["subject"]["name"] != BOT_NAME) {
 
+            //Weather responses
             if(msg["data"]["subject"]["text"] == 'Barney weather') {
-                var weather = require('weather');
-                var message = "No weather data yet...";
-                weather({location: 'Ann Arbor'}, function(data) {
-                  if(data.temp > 60) {
-                    console.log("It's " + data.temp.toString() + " degrees outside! Time to bring out the sundresses!");
-                    message = "It's " + data.temp.toString() + " degrees outside! Time to bring out the sundresses!";
+
+                // Require the module
+                var Forecast = require('forecast');
+
+                // Initialize
+                var forecast = new Forecast({
+                  service: 'forecast.io',
+                  key: 'f267218743d71c6d486401ad298558fa',
+                  units: 'f', // Only the first letter is parsed
+                  cache: true,      // Cache API requests?
+                  ttl: {           // How long to cache requests. Uses syntax from moment.js: http://momentjs.com/docs/#/durations/creating/
+                      minutes: 27,
+                      seconds: 45
+                    }
+                });
+
+                var message = "Nope. Nada. Zilch.";
+
+                // Retrieve weather information from coordinates (Sydney, Australia)
+                forecast.get([42.2828, 83.7347], function(err, weather) {
+                  if(err) console.dir(err);
+                  else console.dir(weather);
+
+                  if(weather.currently.temperature > 60) {
+                    console.log("It's " + weather.currently.temperature.toString() + " degrees outside! Time to bring out the sundresses!");
+                    message = "It's " + weather.currently.temperature.toString() + " degrees outside! Time to bring out the sundresses!";
                   }
-                  else if(data.temp > 40) {
+                  else if(weather.currently.temperature > 40) {
                     console.log("It's cool outside... Just like me.");
                     message = "It's cool outside... Just like me.";
                   }
-                  else if(data.temp > 20) {
+                  else if(weather.currently.temperature > 20) {
                     console.log("Brrrr it's cold! But baby don't worry... Daddy's home!");
                     message = "Brrrr it's cold! But baby don't worry... Daddy's home!";
                   }
@@ -103,6 +124,7 @@ incoming.on('message', function(msg) {
                     message = "Suit up! It's freezing!";
                   }
                 });
+
                 API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
                     bot_id, // Identify the bot that is sending the message
