@@ -108,8 +108,8 @@ incoming.on('message', function(msg) {
                   else  {
                       // console.dir(weather);
 
-                      var weather_forecast = JSON.parse(weather);
-                      var temp = weather_forecast.currently.temperature;
+                      // var weather_forecast = JSON.parse(weather);
+                      var temp = weather.currently.temperature;
                       console.dir("Current temp: " + temp);
 
                       if(temp > 60) {
