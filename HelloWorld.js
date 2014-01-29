@@ -87,7 +87,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Weather Responses
              ***********************************************************************/
-            if(txt.search("Barney weather") != -1) {
+            if(txt == "Barney weather") {
 
                 // Require the module
                 var Forecast = require('forecast');
@@ -151,7 +151,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Bro code
              ***********************************************************************/
-            else if(txt.search("bro code") != -1) {
+            else if(txt == "Barney bro code") {
                 var file = __dirname + '/bro_code.json';
                 fs.readFile(file, 'utf8', function (err, data) {
                   if (err) {
