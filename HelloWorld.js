@@ -158,7 +158,6 @@ incoming.on('message', function(msg) {
                     console.log('Error: ' + err);
                   }
                   else {
-                      data = JSON.parse(data);
                       var message = data[Math.floor(Math.random() * data.length)]
                       API.Bots.post(
                       ACCESS_TOKEN, // Identify the access token
