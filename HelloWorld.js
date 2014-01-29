@@ -102,20 +102,24 @@ incoming.on('message', function(msg) {
 
                 var message = "Nope. Nada. Zilch.";
 
-                // Retrieve weather information from coordinates (Sydney, Australia)
+                // Retrieve weather information from coordinates (Ann Arbor, MI)
                 forecast.get([42.2828, -83.7347], function(err, weather) {
                   if(err) console.dir(err);
                   else console.dir(weather);
 
-                  if(weather.currently.temperature > 60) {
-                    console.log("It's " + weather.currently.temperature.toString() + " degrees outside! Time to bring out the sundresses!");
-                    message = "It's " + weather.currently.temperatured.toString() + " degrees outside! Time to bring out the sundresses!";
+                  var weather_forecast = JSON.parse(weather);
+                  var current_weather = weather_forecast.currently;
+                  var temp = current_weather.temperature;
+
+                  if(temp > 60) {
+                    console.log("It's " + temp.toString() + " degrees outside! Time to bring out the sundresses!");
+                    message = "It's " + tempd.toString() + " degrees outside! Time to bring out the sundresses!";
                   }
-                  else if(weather.currently.temperature > 40) {
+                  else if(temp > 40) {
                     console.log("It's cool outside... Just like me.");
                     message = "It's cool outside... Just like me.";
                   }
-                  else if(weather.currently.temperature > 20) {
+                  else if(temp > 20) {
                     console.log("Brrrr it's cold! But baby don't worry... Daddy's home!");
                     message = "Brrrr it's cold! But baby don't worry... Daddy's home!";
                   }
@@ -128,7 +132,7 @@ incoming.on('message', function(msg) {
                 API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
                     bot_id, // Identify the bot that is sending the message
-                    message.toString(), // Construct the message
+                    message, // Construct the message
                     {}, // No pictures related to this post
                     function(err,res) {
                         if (err) {
