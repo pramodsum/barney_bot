@@ -82,11 +82,12 @@ incoming.on('message', function(msg) {
         && msg["data"]["subject"]["text"].indexOf(BOT_LISTENS_FOR) >= 0) {
 
         if (bot_id && msg["data"]["subject"]["name"] != BOT_NAME) {
+            var txt = msg["data"]["subject"]["text"];
 
             /************************************************************************
              * Weather Responses
              ***********************************************************************/
-            if(msg["data"]["subject"]["text"].search('Barney weather') != -1) {
+            if(txt.search('Barney weather') != -1) {
 
                 // Require the module
                 var Forecast = require('forecast');
@@ -150,7 +151,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Bro code
              ***********************************************************************/
-            else if(msg["data"]["subject"]["text"].search('bro code') != -1) {
+            else if(txt.search('bro code') != -1) {
                 var file = __dirname + '/bro_code.json';
                 fs.readFile(file, 'utf8', function (err, data) {
                   if (err) {
