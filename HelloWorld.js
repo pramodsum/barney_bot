@@ -30,8 +30,8 @@ var ACCESS_TOKEN = process.argv[2];
  ***********************************************************************/
 
 var USER_ID  = process.argv[3];
-// var BOT_NAME = 'Barney Stinson';
-var BOT_NAME = 'TEST BOT';
+var BOT_NAME = 'Barney Stinson';
+// var BOT_NAME = 'TEST BOT';
 
 /************************************************************************
  * Bro Code
