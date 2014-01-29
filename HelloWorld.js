@@ -245,24 +245,31 @@ incoming.on('message', function(msg) {
              * Default spaced out response
              ***********************************************************************/
             else if(msg["data"]["subject"]["name"] != BOT_NAME) {
-              var url = "http://brospeak.com/?api=yeah&input=" + txt;
-              var Request = unirest.get(url)
-                .end(function (response) {
-                  console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
+              var Request = unirest.get("https://yoda.p.mashape.com/yoda?sentence=" + txt)
+              .headers({ 
+                "X-Mashape-Authorization": "iR2g3eyxXH6tK1tZELkkVJikSMeafCWC"
+              })
+              .end(function (response) {
+                console.log(response);
+                // var url = "http://brospeak.com/?api=yeah&input=" + txt;
+                // var Request = unirest.get(url)
+                //   .end(function (response) {
+                //     console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
 
-                  API.Bots.post(
-                      ACCESS_TOKEN, // Identify the access token
-                      bot_id, // Identify the bot that is sending the message
-                      response.body, // Construct the message
-                      {}, // No pictures related to this post
-                      function(err,res) {
-                          if (err) {
-                              console.log("[API.Bots.post] Reply Message Error!");
-                          } else {
-                              console.log("[API.Bots.post] Reply Message Sent!");
-                          }
-                      });
-                });
+                //     API.Bots.post(
+                //         ACCESS_TOKEN, // Identify the access token
+                //         bot_id, // Identify the bot that is sending the message
+                //         response.body, // Construct the message
+                //         {}, // No pictures related to this post
+                //         function(err,res) {
+                //             if (err) {
+                //                 console.log("[API.Bots.post] Reply Message Error!");
+                //             } else {
+                //                 console.log("[API.Bots.post] Reply Message Sent!");
+                //             }
+                //         });
+                //   });
+              });
             }
         }
     }
