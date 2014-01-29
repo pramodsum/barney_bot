@@ -1,5 +1,6 @@
 var express = require("express");
 var logfmt = require("logfmt");
+var unirest = require('unirest');
 var app = express();
 
 app.use(logfmt.requestLogger());
@@ -207,7 +208,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Bro code
              ***********************************************************************/
-            else if(txt.search("bro code") != -1) {
+            else if(txt.search("bro code") != -1 || txt.search("Bro code") != -1) {
               var message = bro_code[Math.floor(Math.random() * bro_code.length)];
               API.Bots.post(
               ACCESS_TOKEN, // Identify the access token
@@ -244,18 +245,24 @@ incoming.on('message', function(msg) {
              * Default spaced out response
              ***********************************************************************/
             else if(msg["data"]["subject"]["name"] != BOT_NAME) {
-                API.Bots.post(
-                    ACCESS_TOKEN, // Identify the access token
-                    bot_id, // Identify the bot that is sending the message
-                    "I'm sorry, what?", // Construct the message
-                    {}, // No pictures related to this post
-                    function(err,res) {
-                        if (err) {
-                            console.log("[API.Bots.post] Reply Message Error!");
-                        } else {
-                            console.log("[API.Bots.post] Reply Message Sent!");
-                        }
-                    });
+              var url = "http://brospeak.com/?api=yeah&input=" + txt;
+              var Request = unirest.get(url)
+                .end(function (response) {
+                  console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
+
+                  API.Bots.post(
+                      ACCESS_TOKEN, // Identify the access token
+                      bot_id, // Identify the bot that is sending the message
+                      response.body, // Construct the message
+                      {}, // No pictures related to this post
+                      function(err,res) {
+                          if (err) {
+                              console.log("[API.Bots.post] Reply Message Error!");
+                          } else {
+                              console.log("[API.Bots.post] Reply Message Sent!");
+                          }
+                      });
+                });
             }
         }
     }
