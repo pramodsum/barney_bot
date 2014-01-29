@@ -152,12 +152,13 @@ incoming.on('message', function(msg) {
              * Bro code
              ***********************************************************************/
             else if(txt.search("bro code") != -1) {
-                var file = __dirname + '/bro_code.json';
-                fs.readFile(file, 'utf8', function (err, data) {
-                  if (err) {
-                    console.log('Error: ' + err);
-                  }
-                  else {
+                var fileJSON = require('/bro_code.json');
+                var data = JSON.parse(fileJSON);
+                // fs.readFile(file, 'utf8', function (err, data) {
+                //   if (err) {
+                //     console.log('Error: ' + err);
+                //   }
+                //   else {
                       var message = data[Math.floor(Math.random() * data.length)]
                       API.Bots.post(
                       ACCESS_TOKEN, // Identify the access token
@@ -171,8 +172,8 @@ incoming.on('message', function(msg) {
                             console.log("[API.Bots.post] Weather Response Sent!");
                         }
                       });
-                  }
-                });
+                  // }
+                // });
             }
             /************************************************************************
              * Default spaced out response
