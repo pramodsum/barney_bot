@@ -22,13 +22,13 @@ var BOT_LISTENS_FOR = "Barney";
  * Read the access token from the command line.
  ***********************************************************************/
 
-var ACCESS_TOKEN = 162428406abb0131ffdd2e42db1e0870;
+var ACCESS_TOKEN = process.argv[2];
 
 /************************************************************************
  * Getting the bot configured and set up:
  ***********************************************************************/
 
-var USER_ID  = 4524586;
+var USER_ID  = process.argv[3];
 var BOT_NAME = 'Barney Stinson';
 
 /************************************************************************
