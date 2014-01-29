@@ -84,7 +84,7 @@ incoming.on('message', function(msg) {
 
             if(msg["data"]["subject"]["text"] == 'Barney weather') {
                 var weather = require('weather');
-                var message = "DAMN its hot! Time to bring out the sundresses!";
+                var message = "No weather data yet...";
                 weather({location: 'Ann Arbor'}, function(data) {
                   if(data.temp > 60) {
                     message = "It's " + data.temp.to_s() + " degrees outside! Time to bring out the sundresses!";
