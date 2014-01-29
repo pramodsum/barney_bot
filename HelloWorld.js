@@ -85,17 +85,21 @@ incoming.on('message', function(msg) {
             if(msg["data"]["subject"]["text"] == 'Barney weather') {
                 var weather = require('weather');
                 var message = "No weather data yet...";
-                weather({location: 'Melbourne'}, function(data) {
+                weather({location: 'Ann Arbor'}, function(data) {
                   if(data.temp > 60) {
+                    console.log("It's " + data.temp.toString() + " degrees outside! Time to bring out the sundresses!");
                     message = "It's " + data.temp.toString() + " degrees outside! Time to bring out the sundresses!";
                   }
                   else if(data.temp > 40) {
+                    console.log("It's cool outside... Just like me.");
                     message = "It's cool outside... Just like me.";
                   }
                   else if(data.temp > 20) {
+                    console.log("Brrrr it's cold! But baby don't worry... Daddy's home!");
                     message = "Brrrr it's cold! But baby don't worry... Daddy's home!";
                   }
                   else {
+                    console.log("Suit up! It's freezing!");
                     message = "Suit up! It's freezing!";
                   }
                 });
