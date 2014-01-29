@@ -2,7 +2,7 @@
   "name": "thatbrown_bot",
   "version": "0.0.0",
   "description": "thatbrown_bot",
-  "main": "web.js",
+  "main": "HelloWorld.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
