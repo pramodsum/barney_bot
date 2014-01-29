@@ -105,27 +105,29 @@ incoming.on('message', function(msg) {
                 // Retrieve weather information from coordinates (Ann Arbor, MI)
                 forecast.get([42.2828, -83.7347], function(err, weather) {
                   if(err) console.dir(err);
-                  else console.dir(weather);
+                  else  {
+                      // console.dir(weather);
 
-                  var weather_forecast = JSON.parse(weather);
-                  var current_weather = weather_forecast.currently;
-                  var temp = current_weather.temperature;
+                      var weather_forecast = JSON.parse(weather);
+                      var temp = weather_forecast.currently.temperature;
+                      console.dir("Current temp: " + temp);
 
-                  if(temp > 60) {
-                    console.log("It's " + temp.toString() + " degrees outside! Time to bring out the sundresses!");
-                    message = "It's " + tempd.toString() + " degrees outside! Time to bring out the sundresses!";
-                  }
-                  else if(temp > 40) {
-                    console.log("It's cool outside... Just like me.");
-                    message = "It's cool outside... Just like me.";
-                  }
-                  else if(temp > 20) {
-                    console.log("Brrrr it's cold! But baby don't worry... Daddy's home!");
-                    message = "Brrrr it's cold! But baby don't worry... Daddy's home!";
-                  }
-                  else {
-                    console.log("Suit up! It's freezing!");
-                    message = "Suit up! It's freezing!";
+                      if(temp > 60) {
+                        console.log("It's " + temp.toString() + " degrees outside! Time to bring out the sundresses!");
+                        message = "It's " + tempd.toString() + " degrees outside! Time to bring out the sundresses!";
+                      }
+                      else if(temp > 40) {
+                        console.log("It's cool outside... Just like me.");
+                        message = "It's cool outside... Just like me.";
+                      }
+                      else if(temp > 20) {
+                        console.log("Brrrr it's cold! But baby don't worry... Daddy's home!");
+                        message = "Brrrr it's cold! But baby don't worry... Daddy's home!";
+                      }
+                      else {
+                        console.log("Suit up! It's freezing!");
+                        message = "Suit up! It's freezing!";
+                      }
                   }
                 });
 
