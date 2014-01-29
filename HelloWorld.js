@@ -1,5 +1,6 @@
 var express = require("express");
 var logfmt = require("logfmt");
+var fs = require('fs');
 var app = express();
 
 app.use(logfmt.requestLogger());
@@ -82,8 +83,10 @@ incoming.on('message', function(msg) {
 
         if (bot_id && msg["data"]["subject"]["name"] != BOT_NAME) {
 
-            //Weather responses
-            if(msg["data"]["subject"]["text"] == 'Barney weather') {
+            /************************************************************************
+             * Weather Responses
+             ***********************************************************************/
+            if(msg["data"]["subject"]["text"].search('Barney weather') != -1) {
 
                 // Require the module
                 var Forecast = require('forecast');
@@ -144,6 +147,37 @@ incoming.on('message', function(msg) {
                   }
                 });
             }
+            /************************************************************************
+             * Bro code
+             ***********************************************************************/
+            else if(msg["data"]["subject"]["text"].search('bro code') != -1) {
+                var file = __dirname + '/bro_code.json';
+                fs.readFile(file, 'utf8', function (err, data) {
+                  if (err) {
+                    console.log('Error: ' + err);
+                  }
+                  else {
+                      data = JSON.parse(data);
+                      var message = data[Math.floor(Math.random() * data.length)]
+                      API.Bots.post(
+                      ACCESS_TOKEN, // Identify the access token
+                      bot_id, // Identify the bot that is sending the message
+                      message, // Construct the message
+                      {}, // No pictures related to this post
+                      function(err,res) {
+                        if (err) {
+                            console.log("[API.Bots.post] Weather Response Error!");
+                        } else {
+                            console.log("[API.Bots.post] Weather Response Sent!");
+                        }
+                      });
+                  }
+                });
+              }
+            }
+            /************************************************************************
+             * Default spaced out response
+             ***********************************************************************/
             else {
                 API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
