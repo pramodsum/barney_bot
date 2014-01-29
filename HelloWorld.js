@@ -106,9 +106,6 @@ incoming.on('message', function(msg) {
                 forecast.get([42.2828, -83.7347], function(err, weather) {
                   if(err) console.dir(err);
                   else  {
-                      // console.dir(weather);
-
-                      // var weather_forecast = JSON.parse(weather);
                       var temp = weather.currently.temperature;
                       console.dir("Current temp: " + temp);
 
@@ -128,10 +125,7 @@ incoming.on('message', function(msg) {
                         console.log("Suit up! It's freezing!");
                         message = "Suit up! It's freezing!";
                       }
-                  }
-                });
-
-                API.Bots.post(
+                    API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
                     bot_id, // Identify the bot that is sending the message
                     message, // Construct the message
@@ -143,6 +137,8 @@ incoming.on('message', function(msg) {
                             console.log("[API.Bots.post] Weather Response Sent!");
                         }
                     });
+                  }
+                });
             }
             else {
                 API.Bots.post(
