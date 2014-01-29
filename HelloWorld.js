@@ -121,9 +121,13 @@ incoming.on('message', function(msg) {
                         console.log("Brrrr it's cold! But baby don't worry... Daddy's home!");
                         message = "Brrrr it's cold! But baby don't worry... Daddy's home!";
                       }
-                      else {
+                      else if(temp > 0) {
                         console.log("Suit up! It's freezing!");
                         message = "Suit up! It's freezing!";
+                      }
+                      else {
+                        console.log("It's " + temp.toString() + " degrees right now. So cold that it's going to be Legen...wait for it...DARY!");
+                        message = "It's " + temp.toString() + " degrees right now. So cold that it's going to be Legen...wait for it...DARY!";
                       }
                     API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
