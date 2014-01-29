@@ -109,7 +109,7 @@ incoming.on('message', function(msg) {
 
                   if(weather.currently.temperature > 60) {
                     console.log("It's " + weather.currently.temperature.toString() + " degrees outside! Time to bring out the sundresses!");
-                    message = "It's " + weather.currently.temperature.toString() + " degrees outside! Time to bring out the sundresses!";
+                    message = "It's " + weather.currently.temperatured.toString() + " degrees outside! Time to bring out the sundresses!";
                   }
                   else if(weather.currently.temperature > 40) {
                     console.log("It's cool outside... Just like me.");
@@ -128,13 +128,13 @@ incoming.on('message', function(msg) {
                 API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
                     bot_id, // Identify the bot that is sending the message
-                    message, // Construct the message
+                    message.toString(), // Construct the message
                     {}, // No pictures related to this post
                     function(err,res) {
                         if (err) {
-                            console.log("[API.Bots.post] Reply Message Error!");
+                            console.log("[API.Bots.post] Weather Response Error!");
                         } else {
-                            console.log("[API.Bots.post] Reply Message Sent!");
+                            console.log("[API.Bots.post] Weather Response Sent!");
                         }
                     });
             }
