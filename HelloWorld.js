@@ -243,7 +243,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Default spaced out response
              ***********************************************************************/
-            else {
+            else if(msg["data"]["subject"]["name"] != BOT_NAME) {
                 API.Bots.post(
                     ACCESS_TOKEN, // Identify the access token
                     bot_id, // Identify the bot that is sending the message
