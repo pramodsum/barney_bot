@@ -107,7 +107,7 @@ incoming.on('message', function(msg) {
     if (msg["data"] 
         && msg["data"]["subject"] 
         && msg["data"]["subject"]["text"]
-        && msg["data"]["subject"]["text"].indexOf(BOT_LISTENS_FOR) >= 0) {
+        /*&& msg["data"]["subject"]["text"].indexOf(BOT_LISTENS_FOR) >= 0*/) {
 
         if (bot_id && msg["data"]["subject"]["name"] != BOT_NAME) {
             var txt = msg["data"]["subject"]["text"];
@@ -115,7 +115,7 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Weather Responses
              ***********************************************************************/
-            if(txt.search("Barney weather") != -1) {
+            if(txt.search("weather") != -1) {
 
                 // Require the module
                 var Forecast = require('forecast');
