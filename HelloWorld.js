@@ -13,7 +13,7 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-var GroupMe = require('groupme');
+var GroupMe = require('./lib/groupme');
 var API = GroupMe.Stateless;
 
 var BOT_LISTENS_FOR = "Barney";
@@ -29,7 +29,8 @@ var ACCESS_TOKEN = process.argv[2];
  ***********************************************************************/
 
 var USER_ID  = process.argv[3];
-var BOT_NAME = 'Barney Stinson';
+// var BOT_NAME = 'Barney Stinson';
+var BOT_NAME = 'TEST BOT';
 
 /************************************************************************
  * Bro Code
