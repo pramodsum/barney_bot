@@ -57,7 +57,7 @@ var bro_code = [
     "A Bro always likes the new profile picture of another bro",
     "A true Bro will never be \"Necklace Guy\".",
     "A bro shall not have a weird moment with another bro's fiance",
-}]
+];
 
 /************************************************************************
  * Set up the message-based IncomingStream and the HTTP push
