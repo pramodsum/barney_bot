@@ -142,9 +142,28 @@ incoming.on('message', function(msg) {
             var txt = msg["data"]["subject"]["text"];
 
             /************************************************************************
+             * Get current location of user
+             ***********************************************************************/
+            var ipAddr = req.headers["x-forwarded-for"];
+            if (ipAddr){
+              var list = ipAddr.split(",");
+              ipAddr = list[list.length-1];
+            } else {
+              ipAddr = req.connection.remoteAddress;
+            }
+
+            var url = 'http://freegeoip.net/json/' + ipAddr;
+            var loc = null;
+            var Request = unirest.get(url)
+              .end(function (response) {
+                loc = response.body;
+                console.dir(response);
+            });
+
+            /************************************************************************
              * Weather Responses
              ***********************************************************************/
-            if(txt.search("weather") != -1) {
+            if(txt.search("weather") != -1 || txt.search("Weather") != -1) {
 
                 // Require the module
                 var Forecast = require('forecast');
@@ -162,6 +181,13 @@ incoming.on('message', function(msg) {
                 });
 
                 var message = "Nope. Nada. Zilch.";
+
+                // var url = 'http://freegeoip.net/json/' + ipAddr;
+                // var loc = null;
+                // var Request = unirest.get(url)
+                //   .end(function (response) {
+                //     loc = response.body;
+                // });
 
                 // Retrieve weather information from coordinates (Ann Arbor, MI)
                 forecast.get([42.2828, -83.7347], function(err, weather) {
@@ -244,8 +270,9 @@ incoming.on('message', function(msg) {
             /************************************************************************
              * Default BRODA responses
              ***********************************************************************/
-            else if(msg["data"]["subject"]["name"] != BOT_NAME) {
+            else if(msg["data"]["subject"]["name"] != BOT_NAME && txt.indexOf("Broda") != -1) {
               var url = "http://brospeak.com/?api=yeah&input=" + txt;
+              txt = txt.replace("Broda ", "")
               var Request = unirest.get(url)
                 .end(function (response) {
                   console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
