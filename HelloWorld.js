@@ -278,12 +278,12 @@ incoming.on('message', function(msg) {
                   console.dir("Text: " + txt + "\nBroSpeak: " + response.body);
                   txt = response.body;
 
-                  var Request = unirest.get("https://yoda.p.mashape.com/yoda?sentence=" + txt)
+                  /*var Request = unirest.get("https://yoda.p.mashape.com/yoda?sentence=" + txt)
                   .headers({ 
                     "X-Mashape-Authorization": "iR2g3eyxXH6tK1tZELkkVJikSMeafCWC"
                   })
                   .end(function (response) {
-                    console.log(response.body);
+                    console.log(response.body);*/
 
                     API.Bots.post(
                         ACCESS_TOKEN, // Identify the access token
@@ -297,7 +297,7 @@ incoming.on('message', function(msg) {
                                 console.log("[API.Bots.post] Reply Message Sent!");
                             }
                     });
-                  });
+                  //});
               });
             }
         }
